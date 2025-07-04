@@ -2,6 +2,8 @@ import { useState } from 'react';
 import './App.css';
 import HumanModel from './components/HumanModel';
 
+const BASE_URL = import.meta.env.VITE_API_BASE;
+
 function App() {
   const [chat, setChat] = useState([]);
   const [userInput, setUserInput] = useState('');
@@ -13,7 +15,7 @@ function App() {
   const handleDiagnose = async () => {
     if (!selectedPart) return alert('Please select a body part on the model.');
 
-    const res = await fetch('http://localhost:5000/api/start', {
+    const res = await fetch(`${BASE_URL}/api/start`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ user_id: userId, pain_area: selectedPart.toLowerCase() })
@@ -32,7 +34,7 @@ function App() {
 
     setChat(prev => [...prev, { from: 'user', text: userInput }]);
 
-    const res = await fetch('http://localhost:5000/api/answer', {
+    const res = await fetch(`${BASE_URL}/api/answer`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ user_id: userId, answer: userInput })
