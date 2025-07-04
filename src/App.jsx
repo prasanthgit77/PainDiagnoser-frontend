@@ -13,6 +13,11 @@ function App() {
   const [diagnosisStarted, setDiagnosisStarted] = useState(false);
 
   const handleDiagnose = async () => {
+console.log("Diagnose button clicked");
+  console.log("Selected part:", selectedPart);
+  console.log("Backend URL:", BASE_URL);
+
+
     if (!selectedPart) return alert('Please select a body part on the model.');
 
     const res = await fetch(`${BASE_URL}/api/start`, {
