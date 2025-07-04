@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import HumanModel from './components/HumanModel';
 
-const BASE_URL = import.meta.env.VITE_API_BASE;
+const BASE_URL = "https://paindiagnoser-backend.onrender.com";
 
 function App() {
   const [chat, setChat] = useState([]);
