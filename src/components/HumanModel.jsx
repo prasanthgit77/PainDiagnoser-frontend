@@ -15,11 +15,8 @@ const BodyModel = ({ onPartClick }) => {
         child.castShadow = true;
         child.receiveShadow = true;
         child.userData.selectable = true;
-
-        // Save original material
         originalMaterials.current.set(child.uuid, child.material);
       }
-
       if (child.name.toLowerCase().includes('capsule') || child.name.toLowerCase().includes('sphere')) {
         child.visible = false;
       }
@@ -27,45 +24,42 @@ const BodyModel = ({ onPartClick }) => {
   }, [scene]);
 
   const handlePointerDown = (e) => {
-  e.stopPropagation();
+    e.stopPropagation();
 
-  if (highlightedMesh && originalMaterials.current.has(highlightedMesh.uuid)) {
-    highlightedMesh.material = originalMaterials.current.get(highlightedMesh.uuid);
-  }
+    if (highlightedMesh && originalMaterials.current.has(highlightedMesh.uuid)) {
+      highlightedMesh.material = originalMaterials.current.get(highlightedMesh.uuid);
+    }
 
-  const clickedMesh = e.object;
-  setHighlightedMesh(clickedMesh);
-  clickedMesh.material = new THREE.MeshStandardMaterial({ color: '#ff8080' });
+    const clickedMesh = e.object;
+    setHighlightedMesh(clickedMesh);
+    clickedMesh.material = new THREE.MeshStandardMaterial({ color: '#ff8080' });
 
-  const { x, y, z } = e.point;
-  let selectedZone = 'unknown';
+    const { x, y, z } = e.point;
+    let selectedZone = 'unknown';
 
-  if (y > 1.6) {
-    selectedZone = 'head';
-  } else if (y > 1.4) {
-    selectedZone = 'neck';
-  } else if (y > 1.2) {
-    selectedZone = Math.abs(x) > 0.6 ? 'shoulder' : (z > 0 ? 'chest' : 'back');
-  } else if (y > 1.0) {
-    selectedZone = Math.abs(x) > 0.6 ? 'elbow' : (z > 0 ? 'stomach' : 'back');
-  } else if (y > 0.7) {
-    selectedZone = Math.abs(x) > 0.6 ? 'hand' : (z > 0 ? 'pelvis' : 'butt');
-  } else if (y > 0.2) {
-    selectedZone = 'thigh';
-  } else if (y > -0.3) {
-    selectedZone = 'knee';
-  } else if (y > -1.0) {
-    selectedZone = 'leg';
-  } else {
-    selectedZone = 'foot';
-  }
+    if (y > 1.6) {
+      selectedZone = 'head';
+    } else if (y > 1.4) {
+      selectedZone = 'neck';
+    } else if (y > 1.15) {
+      selectedZone = Math.abs(x) > 0.6 ? 'shoulder' : (z > 0 ? 'chest' : 'back');
+    } else if (y > 0.95) {
+      selectedZone = Math.abs(x) > 0.6 ? 'elbow' : (z > 0 ? 'stomach' : 'back');
+    } else if (y > 0.6) {
+      selectedZone = Math.abs(x) > 0.6 ? 'hand' : (z > 0 ? 'pelvis' : 'butt');
+    } else if (y > 0.2) {
+      selectedZone = 'thigh';
+    } else if (y > -0.3) {
+      selectedZone = 'knee';
+    } else if (y > -1.0) {
+      selectedZone = 'leg';
+    } else {
+      selectedZone = 'foot';
+    }
 
-  console.log(`Clicked (x:${x.toFixed(2)}, y:${y.toFixed(2)}, z:${z.toFixed(2)}) → ${selectedZone}`);
-  onPartClick(selectedZone);
-};
-
-
-
+    console.log(`Clicked (x:${x.toFixed(2)}, y:${y.toFixed(2)}, z:${z.toFixed(2)}) → ${selectedZone}`);
+    onPartClick(selectedZone);
+  };
 
   return (
     <primitive
@@ -73,7 +67,6 @@ const BodyModel = ({ onPartClick }) => {
       ref={ref}
       scale={[2, 2, 2]}
       position={[0, -2, 0]}
-
       onPointerDown={handlePointerDown}
       onPointerOver={() => (document.body.style.cursor = 'pointer')}
       onPointerOut={() => (document.body.style.cursor = 'default')}
@@ -84,7 +77,6 @@ const BodyModel = ({ onPartClick }) => {
 const HumanModel = ({ onPartSelect }) => {
   return (
     <Canvas camera={{ position: [0, 3.5, 7], fov: 35 }} style={{ background: '#f0f0f0' }}>
-
       <ambientLight intensity={0.6} />
       <directionalLight position={[2, 5, 5]} intensity={1} />
       <OrbitControls enablePan={false} />
