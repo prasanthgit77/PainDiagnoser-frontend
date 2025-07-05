@@ -24,7 +24,7 @@ const BodyModel = ({ onPartClick }) => {
     });
   }, [scene]);
 
- const handlePointerDown = (e) => {
+const handlePointerDown = (e) => {
   e.stopPropagation();
 
   if (highlightedMesh && originalMaterials.current.has(highlightedMesh.uuid)) {
@@ -38,30 +38,37 @@ const BodyModel = ({ onPartClick }) => {
   const { x, y, z } = e.point;
   let selectedZone = 'unknown';
 
-  if (y > 1.6) {
+  if (y > 1.5) {
     selectedZone = 'head';
-  } else if (y > 1.45) {
+  } else if (y > 1.3) {
     selectedZone = 'neck';
-  } else if (y > 1.25) {
-    selectedZone = Math.abs(x) > 0.5 ? 'shoulder' : (z > 0 ? 'chest' : 'back');
-  } else if (y > 1.0) {
-    selectedZone = Math.abs(x) > 0.5 ? 'elbow' : (z > 0 ? 'stomach' : 'back');
-  } else if (y > 0.75) {
-    selectedZone = Math.abs(x) > 0.5 ? 'hand' : (z > 0 ? 'pelvis' : 'butt');
-  } else if (y > 0.45) {
+  } else if (y > 1.1 && Math.abs(x) > 0.3) {
+    selectedZone = 'shoulder';
+  } else if (y > 0.9 && Math.abs(x) > 0.4) {
+    selectedZone = 'elbow';
+  } else if (y > 0.7 && Math.abs(x) > 0.45) {
+    selectedZone = 'hand';
+  } else if (y > 0.7 && z > 0) {
+    selectedZone = 'chest';
+  } else if (y > 0.5 && z <= 0) {
+    selectedZone = 'back';
+  } else if (y > 0.3) {
+    selectedZone = 'stomach';
+  } else if (y > 0.1) {
+    selectedZone = z >= 0 ? 'pelvis' : 'butt';
+  } else if (y > -0.3) {
     selectedZone = 'thigh';
-  } else if (y > 0.15) {
+  } else if (y > -0.7) {
     selectedZone = 'knee';
-  } else if (y > -0.4) {
+  } else if (y > -1.1) {
     selectedZone = 'leg';
   } else {
     selectedZone = 'foot';
   }
 
-  console.log(`Clicked at x:${x.toFixed(2)}, y:${y.toFixed(2)}, z:${z.toFixed(2)} → ${selectedZone}`);
+  console.log(`Clicked (x:${x.toFixed(2)}, y:${y.toFixed(2)}, z:${z.toFixed(2)}) → ${selectedZone}`);
   onPartClick(selectedZone);
 };
-
 
   return (
     <primitive
