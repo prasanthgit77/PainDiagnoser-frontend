@@ -27,39 +27,43 @@ const BodyModel = ({ onPartClick }) => {
   }, [scene]);
 
   const handlePointerDown = (e) => {
-    e.stopPropagation();
+  e.stopPropagation();
 
-    // Restore old highlight
-    if (highlightedMesh && originalMaterials.current.has(highlightedMesh.uuid)) {
-      highlightedMesh.material = originalMaterials.current.get(highlightedMesh.uuid);
-    }
+  if (highlightedMesh && originalMaterials.current.has(highlightedMesh.uuid)) {
+    highlightedMesh.material = originalMaterials.current.get(highlightedMesh.uuid);
+  }
 
-    const clickedMesh = e.object;
-    setHighlightedMesh(clickedMesh);
-    clickedMesh.material = new THREE.MeshStandardMaterial({ color: '#ff8080' });
+  const clickedMesh = e.object;
+  setHighlightedMesh(clickedMesh);
+  clickedMesh.material = new THREE.MeshStandardMaterial({ color: '#ff8080' });
 
-    const { x, y, z } = e.point;
-    let selectedZone = 'unknown';
+  const { x, y, z } = e.point;
+  let selectedZone = 'unknown';
 
-    if (y > 1.4) {
-      selectedZone = 'head';
-    } else if (y > 0.9) {
-      selectedZone = z > 0 ? 'chest' : 'back';
-    } else if (y > 0.4) {
-      selectedZone = z > 0 ? 'stomach' : 'back';
-    } else if (y > 0.0) {
-      selectedZone = z > 0 ? 'pelvis' : 'butt';
-    } else if (y > -0.4) {
-      selectedZone = 'thigh';
-    } else if (y > -1.1) {
-      selectedZone = 'knee';
-    } else {
-      selectedZone = 'foot';
-    }
+  if (y > 1.6) {
+    selectedZone = 'head';
+  } else if (y > 1.4) {
+    selectedZone = 'neck';
+  } else if (y > 1.0) {
+    selectedZone = Math.abs(x) > 0.9 ? 'shoulder' : (z > 0 ? 'chest' : 'back');
+  } else if (y > 0.7) {
+    selectedZone = Math.abs(x) > 0.9 ? 'elbow' : (z > 0 ? 'stomach' : 'back');
+  } else if (y > 0.4) {
+    selectedZone = Math.abs(x) > 0.9 ? 'hand' : (z > 0 ? 'pelvis' : 'butt');
+  } else if (y > -0.1) {
+    selectedZone = 'thigh';
+  } else if (y > -0.6) {
+    selectedZone = 'knee';
+  } else if (y > -1.2) {
+    selectedZone = 'leg';
+  } else {
+    selectedZone = 'foot';
+  }
 
-    console.log(`Clicked (x:${x.toFixed(2)}, y:${y.toFixed(2)}, z:${z.toFixed(2)}) → ${selectedZone}`);
-    onPartClick(selectedZone);
-  };
+  console.log(`Clicked (x:${x.toFixed(2)}, y:${y.toFixed(2)}, z:${z.toFixed(2)}) → ${selectedZone}`);
+  onPartClick(selectedZone);
+};
+
 
   return (
     <primitive
