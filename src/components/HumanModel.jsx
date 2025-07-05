@@ -46,15 +46,15 @@ const BodyModel = ({ onPartClick }) => {
     selectedZone = 'neck';
   } else if (y > 1.2) {
     selectedZone = Math.abs(x) > 0.6 ? 'shoulder' : (z > 0 ? 'chest' : 'back');
-  } else if (y > 0.9) {
+  } else if (y > 1.0) {
     selectedZone = Math.abs(x) > 0.6 ? 'elbow' : (z > 0 ? 'stomach' : 'back');
-  } else if (y > 0.5) {
+  } else if (y > 0.7) {
     selectedZone = Math.abs(x) > 0.6 ? 'hand' : (z > 0 ? 'pelvis' : 'butt');
-  } else if (y > -0.1) {
+  } else if (y > 0.2) {
     selectedZone = 'thigh';
-  } else if (y > -0.6) {
+  } else if (y > -0.3) {
     selectedZone = 'knee';
-  } else if (y > -1.2) {
+  } else if (y > -1.0) {
     selectedZone = 'leg';
   } else {
     selectedZone = 'foot';
@@ -63,6 +63,7 @@ const BodyModel = ({ onPartClick }) => {
   console.log(`Clicked (x:${x.toFixed(2)}, y:${y.toFixed(2)}, z:${z.toFixed(2)}) → ${selectedZone}`);
   onPartClick(selectedZone);
 };
+
 
 
 
