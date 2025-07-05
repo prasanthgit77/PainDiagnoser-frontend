@@ -17,6 +17,7 @@ const BodyModel = ({ onPartClick }) => {
         child.userData.selectable = true;
         originalMaterials.current.set(child.uuid, child.material);
       }
+
       if (child.name.toLowerCase().includes('capsule') || child.name.toLowerCase().includes('sphere')) {
         child.visible = false;
       }
@@ -41,17 +42,29 @@ const BodyModel = ({ onPartClick }) => {
       selectedZone = 'head';
     } else if (y > 1.4) {
       selectedZone = 'neck';
-    } else if (y > 1.15) {
-      selectedZone = Math.abs(x) > 0.6 ? 'shoulder' : (z > 0 ? 'chest' : 'back');
-    } else if (y > 0.95) {
-      selectedZone = Math.abs(x) > 0.6 ? 'elbow' : (z > 0 ? 'stomach' : 'back');
-    } else if (y > 0.6) {
-      selectedZone = Math.abs(x) > 0.6 ? 'hand' : (z > 0 ? 'pelvis' : 'butt');
-    } else if (y > 0.2) {
+    } else if (y > 1.2) {
+      if (Math.abs(x) > 0.5) {
+        selectedZone = 'shoulder';
+      } else {
+        selectedZone = z > 0 ? 'chest' : 'back';
+      }
+    } else if (y > 1.0) {
+      if (Math.abs(x) > 0.5) {
+        selectedZone = 'elbow';
+      } else {
+        selectedZone = z > 0 ? 'stomach' : 'butt';
+      }
+    } else if (y > 0.8) {
+      if (Math.abs(x) > 0.5) {
+        selectedZone = 'hand';
+      } else {
+        selectedZone = 'pelvis';
+      }
+    } else if (y > 0.4) {
       selectedZone = 'thigh';
-    } else if (y > -0.3) {
+    } else if (y > 0.0) {
       selectedZone = 'knee';
-    } else if (y > -1.0) {
+    } else if (y > -0.6) {
       selectedZone = 'leg';
     } else {
       selectedZone = 'foot';
