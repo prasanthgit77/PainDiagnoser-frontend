@@ -82,7 +82,8 @@ const BodyModel = ({ onPartClick }) => {
 
 const HumanModel = ({ onPartSelect }) => {
   return (
-    <Canvas camera={{ position: [0, 1.5, 4], fov: 40 }} style={{ background: '#f0f0f0' }}>
+    <Canvas camera={{ position: [0, 2.5, 6], fov: 35 }} style={{ background: '#f0f0f0' }}>
+
       <ambientLight intensity={0.6} />
       <directionalLight position={[2, 5, 5]} intensity={1} />
       <OrbitControls enablePan={false} />
