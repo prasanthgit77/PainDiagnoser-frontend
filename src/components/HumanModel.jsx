@@ -72,7 +72,8 @@ const BodyModel = ({ onPartClick }) => {
       object={scene}
       ref={ref}
       scale={[2, 2, 2]}
-      position={[0, -1.8, 0]}
+      position={[0, -2, 0]}
+
       onPointerDown={handlePointerDown}
       onPointerOver={() => (document.body.style.cursor = 'pointer')}
       onPointerOut={() => (document.body.style.cursor = 'default')}
@@ -82,7 +83,7 @@ const BodyModel = ({ onPartClick }) => {
 
 const HumanModel = ({ onPartSelect }) => {
   return (
-    <Canvas camera={{ position: [0, 2.5, 6], fov: 35 }} style={{ background: '#f0f0f0' }}>
+    <Canvas camera={{ position: [0, 3.5, 7], fov: 35 }} style={{ background: '#f0f0f0' }}>
 
       <ambientLight intensity={0.6} />
       <directionalLight position={[2, 5, 5]} intensity={1} />
