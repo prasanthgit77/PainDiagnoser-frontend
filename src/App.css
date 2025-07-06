@@ -2,7 +2,7 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: #f8f9fa;
+  background: #f1f4f6;
   overflow-x: hidden;
 }
 
@@ -10,22 +10,23 @@ body {
   display: flex;
   flex-direction: row;
   height: 100vh;
-  overflow-x: hidden;
-  max-width: 100vw;   /* ensure no overflow due to large child widths */
+  max-width: 100vw;
 }
 
-
+/* Panels */
 .left-panel,
 .right-panel {
   width: 50vw;
   padding: 30px;
   display: flex;
   flex-direction: column;
-  background-color: #fff;
+  background: #ffffffdd;
+  backdrop-filter: blur(5px);
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
   overflow: hidden;
 }
 
+/* Titles */
 .main-title {
   font-size: 32px;
   font-weight: bold;
@@ -51,10 +52,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
 }
 
-/* Diagnose button */
+/* Diagnose Button */
 .diagnose-btn {
   background-color: #007bff;
   color: white;
@@ -64,50 +64,99 @@ body {
   cursor: pointer;
   font-weight: bold;
   margin-top: 15px;
+  transition: background 0.3s;
 }
 
 .diagnose-btn:hover {
   background-color: #0056b3;
 }
 
-/* Chat section */
+/* Chat Section */
 .chat-title {
-  font-size: 22px;
+ font-size: 22px;
   font-weight: bold;
-  color: #333;
+  color: #2d2d2d;
   margin-bottom: 15px;
   text-align: center;
   border-bottom: 2px solid #ccc;
   padding-bottom: 5px;
 }
 
+/* Chat box */
 .chat-box {
   flex-grow: 1;
-  background-color: #f1f1f1;
+  background: rgba(255, 255, 255, 0.9); /* less transparency */
   padding: 15px;
-  border-radius: 10px;
+  border-radius: 16px;
   overflow-y: auto;
   margin-bottom: 10px;
   max-height: 65vh;
   display: flex;
   flex-direction: column;
-  width: 92%; /* was 70%, now fits better */
-  align-self: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(200, 200, 200, 0.6);
+  position: relative;
+}
+
+/* Empty chat placeholder */
+.chat-box::before {
+  content: "Hey, I’m your pain diagnoser. Select the area where you're feeling pain, and I’ll try to help you...";
+  color: #999;
+  font-style: italic;
+  font-size: 16px;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.6;
+  pointer-events: none;
+  display: none;
+}
+
+.chat-box:empty::before {
+  content: "Hey, I’m your pain diagnoser. Select the area where you're feeling pain, and I’ll try to help you 👨‍⚕️ .";
+  color: #555;
+  font-style: italic;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.7;
+  pointer-events: none;
+  display: block;
+  font-family: 'Segoe UI', sans-serif;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 12px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
 
+/* Chat messages */
 .user-msg,
 .ai-msg {
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 8px;
-  max-width: 90%;
-  word-wrap: break-word;
+   margin-bottom: 12px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  max-width: 85%;
+  font-size: 16px;
+  line-height: 1.5;
+  word-break: break-word;
+  animation: fadeIn 0.4s ease-in-out;
+  color: #111;
+  font-weight: 500;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .user-msg {
   align-self: flex-end;
-  background-color: #d1e7dd;
+  background-color: #c7f3d0; /* brighter green */
   text-align: right;
 }
 
@@ -115,22 +164,34 @@ body {
   align-self: flex-start;
   background-color: #f8d7da;
   text-align: left;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
-/* Chat input row */
+/* Animation */
+@keyframes fadeIn {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+/* Input row */
 .input-row {
   display: flex;
-  flex-wrap: wrap;  /* allows inputs to wrap if needed */
+  flex-wrap: wrap;
   gap: 10px;
   width: 92%;
   align-self: center;
 }
 
-
 .input-row input {
   flex: 1;
   padding: 10px;
-  border-radius: 6px;
+  border-radius: 8px;
   border: 1px solid #ccc;
   font-size: 16px;
 }
@@ -140,59 +201,51 @@ body {
   background-color: #28a745;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
   font-size: 16px;
+  transition: background 0.3s;
 }
 
 .input-row button:hover {
   background-color: #218838;
 }
-/* 🌐 Responsive Styles for Mobile Screens */
+
+/* Responsive */
 @media (max-width: 768px) {
   .app-container {
     flex-direction: column;
     height: auto;
-    overflow-x: hidden;
   }
 
   .left-panel,
   .right-panel {
     width: 100vw;
     padding: 20px;
-    box-sizing: border-box;
   }
 
   .main-title {
     font-size: 24px;
-    margin-bottom: 8px;
-    word-break: break-word;
   }
 
   .instruction-text,
   .chat-title {
     font-size: 16px;
-    word-break: break-word;
   }
 
   .model-wrapper {
     height: 400px;
     margin-bottom: 20px;
-    width: 100%;
-    overflow: hidden;
   }
 
   .diagnose-btn {
     width: 100%;
-    font-size: 16px;
-    margin-top: 12px;
   }
 
   .chat-box {
     width: 100%;
     max-height: 300px;
-    overflow-y: auto;
   }
 
   .input-row {
@@ -204,13 +257,11 @@ body {
   .input-row input,
   .input-row button {
     width: 100%;
-    font-size: 16px;
   }
 
   .user-msg,
   .ai-msg {
     font-size: 15px;
-    padding: 8px;
-    word-break: break-word;
+    padding: 10px;
   }
 }
