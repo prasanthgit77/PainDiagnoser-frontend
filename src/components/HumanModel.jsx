@@ -37,34 +37,29 @@ const handlePointerDown = (e) => {
 
   const { x, y, z } = e.point;
   let selectedZone = 'unknown';
+  console.log(`Clicked: x=${x.toFixed(2)}, y=${y.toFixed(2)}, z=${z.toFixed(2)}`);
+if (y > 1.5) {
+  selectedZone = 'head';
+} else if (y > 1.35) {
+  selectedZone = 'neck';
+} else if (y > 1.15 && Math.abs(x) > 0.3) {
+  selectedZone = 'shoulder';
+} else if (y > 0.85 && Math.abs(x) > 0.6) {
+  selectedZone = 'elbow';
+} else if (y > 0.45 && Math.abs(x) > 0.6) {
+  selectedZone = 'hand';
+} else if (y > 0.25) {
+  selectedZone = z >= 0 ? 'pelvis' : 'butt';
+} else if (y > -0.1) {
+  selectedZone = 'thigh';
+} else if (y > -0.7) {
+  selectedZone = 'knee';
+} else if (y > -1.1) {
+  selectedZone = 'leg';
+} else {
+  selectedZone = 'foot';
+}
 
-  if (y > 1.5) {
-    selectedZone = 'head';
-  } else if (y > 1.3) {
-    selectedZone = 'neck';
-  } else if (y > 1.1 && Math.abs(x) > 0.3) {
-    selectedZone = 'shoulder';
-  } else if (y > 0.9 && Math.abs(x) > 0.4) {
-    selectedZone = 'elbow';
-  } else if (y > 0.7 && Math.abs(x) > 0.45) {
-    selectedZone = 'hand';
-  } else if (y > 0.7 && z > 0) {
-    selectedZone = 'chest';
-  } else if (y > 0.5 && z <= 0) {
-    selectedZone = 'back';
-  } else if (y > 0.3) {
-    selectedZone = 'stomach';
-  } else if (y > 0.1) {
-    selectedZone = z >= 0 ? 'pelvis' : 'butt';
-  } else if (y > -0.3) {
-    selectedZone = 'thigh';
-  } else if (y > -0.7) {
-    selectedZone = 'knee';
-  } else if (y > -1.1) {
-    selectedZone = 'leg';
-  } else {
-    selectedZone = 'foot';
-  }
 
   console.log(`Clicked (x:${x.toFixed(2)}, y:${y.toFixed(2)}, z:${z.toFixed(2)}) → ${selectedZone}`);
   onPartClick(selectedZone);
