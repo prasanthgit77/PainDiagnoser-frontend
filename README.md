@@ -8,26 +8,26 @@ Fot the backend go to PainDiagnoser-backend repo in my profile.
 
 Features
 
-🧍‍♂️ Clickable 3D human model (GLB/glTF) — select any body part to start diagnosis
-💬 Chat-style follow-up: AI-style questions generated from the backend to gather symptoms
-🎯 Zone-aware mapping — front/back and left/right detection (head, neck, chest, back, pelvis, thigh, knee, leg, foot, shoulder, elbow, hand, etc.)
-🔴 Visual highlight — selected part lights up with a subtle light-red marker for clarity
-⌨️ Keyboard support — press Enter to send chat replies (plus Send button)
-📱 Responsive UI — desktop and mobile friendly layouts and touch support
-⚡ Fast local inference — lightweight rule/heuristic-based diagnosis logic in Python (Flask) (no OpenAI dependency)
-🚀 Deployable — frontend on Vercel, backend on Render (or any static + Flask host)
+🧍‍♂️ Clickable 3D human model (GLB/glTF) — select any body part to start diagnosis.
+💬 Chat-style follow-up: AI-style questions generated from the backend to gather symptoms.
+🎯 Zone-aware mapping — front/back and left/right detection (head, neck, chest, back, pelvis, thigh, knee, leg, foot, shoulder, elbow, hand, etc.).
+🔴 Visual highlight — selected part lights up with a subtle light-red marker for clarity.
+⌨️ Keyboard support — press Enter to send chat replies (plus Send button).
+📱 Responsive UI — desktop and mobile friendly layouts and touch support.
+⚡ Fast local inference — lightweight rule/heuristic-based diagnosis logic in Python (Flask) (no OpenAI dependency).
+🚀 Deployable — frontend on Vercel, backend on Render (or any static + Flask host).
 
 Tech Stack
 
-Frontend: React, React Three Fiber / @react-three/drei (Three.js), Vite, CSS
+Frontend: React, React Three Fiber / @react-three/drei (Three.js), Vite, CSS.
 
-3D Model: glTF / .glb human model (customizable)
+3D Model: glTF / .glb human model (customizable).
 
-Backend: Python (Flask) — diagnostic logic, question flows, session handling
+Backend: Python (Flask) — diagnostic logic, question flows, session handling.
 
-Data: JSON question flows (easy to extend) — optional MongoDB if you want to persist sessions/logs
+Data: JSON question flows (easy to extend) — optional MongoDB if you want to persist sessions/logs.
 
-Deployment: Vercel (frontend), Render / any WSGI host (backend)
+Deployment: Vercel (frontend), Render / Render (backend).
 
 Why it’s useful
 
