@@ -45,6 +45,10 @@ Accuracy depends on the question flow and diagnostic heuristics — consider add
 
 
 
+<img width="1920" height="1080" alt="Screenshot (223)" src="https://github.com/user-attachments/assets/98317d8c-6c6d-4bd7-ac3b-d578db8fa503" />
+
+<img width="1920" height="1080" alt="Screenshot (224)" src="https://github.com/user-attachments/assets/2f3dc95d-1aa2-4873-a46d-bbb57eab4334" />
+
 
 # React + Vite
 
